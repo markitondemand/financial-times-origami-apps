@@ -1,0 +1,13 @@
+{
+  "description": "Markit Digital Test Module",
+  "origamiType": "module",
+  "origamiVersion": 1,
+  "keywords": "markit digital, test, proof of concept",
+  "origamiCategory": "component",
+  "support": "matthew.tordoff@ihsmarkit.com",
+  "supportStatus": "experimental",
+  "browserFeatures": {},
+  "demosDefaults": {},
+  "demos": [{}],
+  "ci": {}
+}
