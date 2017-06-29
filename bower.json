@@ -1,0 +1,20 @@
+{
+  "name": "o-markitdigital-test",
+  "description": "Markit Digital Test Origami Component",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "main": [
+    "main.scss",
+	"main.js"
+  ],
+  "dependencies": {
+    "o-colors": "^4.0.0",
+    "o-fonts": "^3.0.0",
+    "o-grid":"^4.3.3"
+  }
+}
