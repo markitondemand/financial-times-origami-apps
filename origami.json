@@ -7,7 +7,15 @@
   "support": "matthew.tordoff@ihsmarkit.com",
   "supportStatus": "experimental",
   "browserFeatures": {},
-  "demosDefaults": {},
-  "demos": [{}],
+  "demosDefaults": {
+    "js": "demos/src/demo.js",
+    "sass": "demos/src/demo.scss"
+  },
+  "demos": [{
+      "name": "first-demo",
+      "template": "demos/src/demo.mustache",
+      "data": "demos/src/demo.json",
+      "description": "First demo"
+    }],
   "ci": {}
 }

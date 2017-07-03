@@ -1,5 +1,19 @@
 @import "o-colors/main";
+@import 'o-fonts/main';
+@import 'o-typography/main';
+@include oFontsIncludeAll();
 
 .o-markitdigital-test {
     display: block;
+    @include oColorsFor(page);
+    font-family: oFontsGetFontFamilyWithFallbacks(FinancierDisplayWeb);
+    width: 260px;
+    height: 260px;
+
+    .companyName {
+        @include oTypographyDisplay(2);
+        @include oColorsFor('o-teaser', text, 80);
+        @include oTypographyMargin($top: 0, $bottom: 0);
+        font-weight: oFontsWeight(normal);
+    }
 }

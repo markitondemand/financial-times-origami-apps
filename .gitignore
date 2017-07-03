@@ -3,3 +3,9 @@ bower_components
 
 # Dependency directories
 node_modules/
+
+# Built demos
+demos/local
+
+# Build folder
+build

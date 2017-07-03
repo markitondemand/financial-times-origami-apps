@@ -20,7 +20,7 @@ _Common templating can go here, especially if there is only one template, but pe
 _Remember to start your codeblocks with three backticks and "html" so your markup is syntax highlighted correctly._
 
 ```html
-<div data-o-component="o-markitdigital-test" class='o-markitdigital-test'>
+<div class='o-markitdigital-test' data-o-component='o-markitdigital-test' data-o-markitdigital-test-symbol='AAPL'>
 </div>
 ```
 
