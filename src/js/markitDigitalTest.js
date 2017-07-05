@@ -26,25 +26,19 @@ class MarkitDigitalTest {
 			const change1DayPercent = resp["data"].items[0].quote.change1DayPercent.toFixed(2);
 
 			let htmlTemplate =
-			`<h1 class="title">Equity highlight</h1>
-				<div class="content">
-					<div class="header">
-						<div class="nameAndSymbol">
-							<a class="companyName" href="">${companyName}</a>
-							<div class="Symbol">Company Symbol: ${symbol}</div>
-						</div>
-						<div>
-							<div class="lastPrice">Last Price: ${lastPrice}</div>
-							<div class="currency">Currency: ${currency}</div>
-						</div>
-					</div>
-					<div class="body">
-						<div class="priceChange">
-							<div class="absoluteChange">Day Change: ${change1Day}</div>
-							<div class="percentageChange">Day Change Percent: ${change1DayPercent}%</div>
-						</div>
-					</div>
-				</div>`;
+			`<h1 class="o-markitdigital-test__title">Equity highlight</h1>
+			<div class="o-markitdigital-test__content">
+				
+				<a class="o-markitdigital-test__companyName" href="">${companyName}</a>
+				<div>Company Symbol: ${symbol}</div>
+			
+				<div>Last Price: ${lastPrice}</div>
+				<div>Currency: ${currency}</div>
+			
+				<div>Day Change: ${change1Day}</div>
+				<div>Day Change Percent: ${change1DayPercent}%</div>
+			
+			</div>`;
 
 			let insertionPoint = document.getElementsByClassName('o-markitdigital-test')[0];
 			insertionPoint.insertAdjacentHTML('afterbegin', htmlTemplate);

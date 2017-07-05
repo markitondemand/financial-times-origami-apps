@@ -15,7 +15,7 @@
         width: 260px;
         height: 260px;
 
-        .companyName {
+        .o-markitdigital-test__companyName {
             @include oTypographyDisplay(2);
             @include oColorsFor('o-teaser', text, 80);
             @include oTypographyMargin($top: 0, $bottom: 0);

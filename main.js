@@ -1,7 +1,6 @@
 import oMarkitDigitalTest from './src/js/markitDigitalTest';
 
 const constructAll = function() {
-	console.log('test');
 	oMarkitDigitalTest.init();
 	document.removeEventListener('o.DOMContentLoaded', constructAll);
 };
