@@ -12,7 +12,7 @@ class MarkitDigitalTest {
 	makeQuoteCall(sym){
 		// Make a quote call and then update module with the results.
 		//Need to update to get a valid source key - this one is currently the jump page key and regularly expires.
-		const url = 'http://markets.ft.com/research/webservices/securities/v1/quotes?symbols=' + sym + '&source=8915b8ac6eed1029'
+		const url = 'http://markets.ft.com/research/webservices/securities/v1/quotes?symbols=' + sym + '&source=8915b8ac6eed1029';
 
 		fetch(url)
 		.then((resp) => resp.json())
@@ -25,7 +25,7 @@ class MarkitDigitalTest {
 			const change1Day = resp["data"].items[0].quote.change1Day.toFixed(2);
 			const change1DayPercent = resp["data"].items[0].quote.change1DayPercent.toFixed(2);
 
-			var htmlTemplate =
+			let htmlTemplate =
 			`<h1 class="title">Equity highlight</h1>
 				<div class="content">
 					<div class="header">
@@ -46,7 +46,7 @@ class MarkitDigitalTest {
 					</div>
 				</div>`;
 
-			var insertionPoint = document.getElementsByClassName('o-markitdigital-test')[0];
+			let insertionPoint = document.getElementsByClassName('o-markitdigital-test')[0];
 			insertionPoint.insertAdjacentHTML('afterbegin', htmlTemplate);
 		})
 		.catch(function(error){
