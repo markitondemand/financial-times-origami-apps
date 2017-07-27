@@ -1,11 +1,15 @@
 # Bower dependency directory (https://bower.io/)
-bower_components
+bower_components/
 
 # Dependency directories
 node_modules/
 
 # Built demos
-demos/local
+demos/local/
 
 # Build folder
-build
+build/
+
+.DS_Store
+.sass-cache/
+.vscode/

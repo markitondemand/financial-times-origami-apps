@@ -1,0 +1,36 @@
+// Output grid helper classes and data-attributes
+$o-buttons-is-silent: false;
+
+@import 'src/scss/variables';
+
+@import "o-colors/main";
+@import 'o-fonts/main';
+@import 'o-typography/main';
+@import 'o-buttons/main';
+
+@if $o-equity-highlight-app-is-silent == false {
+
+    @include oFontsIncludeAll();
+
+    .o-equity-highlight-app {
+        display: block;
+        @include oColorsFor(page);
+        font-family: oFontsGetFontFamilyWithFallbacks(FinancierDisplayWeb);
+        width: 260px;
+        height: 260px;
+
+        &__companyName {
+            @include oTypographyDisplay(2);
+            @include oColorsFor('o-teaser', text, 80);
+            @include oTypographyMargin($top: 0, $bottom: 0);
+            font-weight: oFontsWeight(normal);
+        }
+        .mod-app.mod-module--bordered {
+            position: relative;
+            border: 1px solid #d3c5b4;
+            padding: 10px 15px 15px 20px;
+        }
+        
+    }
+
+}

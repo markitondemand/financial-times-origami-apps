@@ -1,0 +1,21 @@
+{
+  "description": "Markit Digital Equity Highlight Module",
+  "origamiType": "module",
+  "origamiVersion": 1,
+  "keywords": "markit digital, equity highlight",
+  "origamiCategory": "component",
+  "support": "sakshi.jain@ihsmarkit.com",
+  "supportStatus": "experimental",
+  "browserFeatures": {},
+  "demosDefaults": {
+    "js": "demos/src/demo.js",
+    "sass": "demos/src/demo.scss"
+  },
+  "demos": [{
+      "name": "equity-highlight-app",
+      "template": "demos/src/demo.mustache",
+      "data": "demos/src/demo.json",
+      "description": "First demo"
+    }],
+  "ci": {}
+}
