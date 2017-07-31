@@ -31,6 +31,20 @@ $o-buttons-is-silent: false;
             padding: 10px 15px 15px 20px;
         }
         
+        .mod-app .mod-module__footer {
+            font-family: MetricWeb,sans-serif;
+        }
+
+        .mod-ui-link {
+            color: #9e2f50;
+            text-decoration: none;
+            cursor: pointer;
+            padding-top: 10px;
+            border-top: 1px solid #E9DECF;
+            display: block;
+            font: 600 16px MetricWeb,sans-serif;
+        }
+        
     }
 
 }

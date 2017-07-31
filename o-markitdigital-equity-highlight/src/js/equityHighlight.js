@@ -14,18 +14,26 @@ class EquityHighlightApp {
 	makeQuoteCall(sym){
 		// Make a quote call and then update module with the results.
 		//Need to update to get a valid source key - this one is currently the jump page key and regularly expires.
-		const url = 'http://markets.ft.com/research/webservices/securities/v1/quotes?symbols=' + sym + '&source=cc406d96ec1cd49f';
+		const sourceKey = '042a7723d770ad6e';
+		const quoteService = 'http://markets.ft.com/research/webservices/securities/v1/quotes?symbols=' + sym + '&source=' + sourceKey;
+		const timeSeriesService = 'http://ft.wsodqa.com/research/webservices/securities/v1/time-series?symbols=' + sym + '&source=' + sourceKey;
 
-		fetch(url)
-		.then((resp) => resp.json())
+		var quoteServiceRequest = fetch(quoteService).then(resp => resp.json());
+		var timeSeriesServiceRequest = fetch(timeSeriesService).then(resp => resp.json());
+
+		Promise.all([quoteServiceRequest, timeSeriesServiceRequest])
 		.then(function(resp){
+			if(resp != null && resp.length > 1) {
+			var quoteData = resp[0]["data"];
+			var timeSeriesData = resp[1]["data"]["items"][0]["timeSeries"]["timeSeriesData"];
 
-			const companyName = resp["data"].items[0].basic.name;
-			const symbol = resp["data"].items[0].basic.symbol;
-			const lastPrice = resp["data"].items[0].quote.lastPrice;
-			const currency = resp["data"].items[0].basic.currency;
-			const change1Day = resp["data"].items[0].quote.change1Day.toFixed(2);
-			const change1DayPercent = resp["data"].items[0].quote.change1DayPercent.toFixed(2);
+			const companyName = quoteData.items[0].basic.name;
+			const symbol = quoteData.items[0].basic.symbol;
+			const lastPrice = quoteData.items[0].quote.lastPrice.toFixed(2);
+			const currency = quoteData.items[0].basic.currency;
+			const change1Day = quoteData.items[0].quote.change1Day.toFixed(2);
+			const change1DayPercent = quoteData.items[0].quote.change1DayPercent.toFixed(2);
+			const timeSeriesDataParams = JSON.stringify(timeSeriesData);
 
 			let htmlTemplate =
 			`<div data-o-component="o-aside-panel" class="o-aside-panel">
@@ -45,13 +53,17 @@ class EquityHighlightApp {
 							<div>Day Change Percent: ${change1DayPercent}%</div>
 						
 						</div>
-						<div id="modsymbolchart"></div>
+						<div id="mod-symbol-chart" data-mod-config=${timeSeriesDataParams}></div>
 				</div>
+				<footer class="mod-module__footer">
+					<a class="mod-ui-link" href="//ft.wsodqa.com/data/equities">View more equities</a>
+				</footer>
 			</div>`;
 
 			let insertionPoint = document.getElementsByClassName('o-equity-highlight-app')[0];
 			insertionPoint.insertAdjacentHTML('afterbegin', htmlTemplate);
-			new MOD.SymbolChartApp('#modsymbolchart');
+			//new MOD.SymbolChartApp('#mod-symbol-chart');
+			}
 		})
 		.catch(function(error){
 			console.log("Error retrieving quote data for " + sym + ": " + error);
