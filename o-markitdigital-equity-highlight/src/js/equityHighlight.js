@@ -1,6 +1,4 @@
 require('mustache');
-require('./modcharts.js');
-require('./symbolChart.js');
 
 class EquityHighlightApp {
 
@@ -14,7 +12,7 @@ class EquityHighlightApp {
 	makeQuoteCall(sym){
 		// Make a quote call and then update module with the results.
 		//Need to update to get a valid source key - this one is currently the jump page key and regularly expires.
-		const url = 'http://markets.ft.com/research/webservices/securities/v1/quotes?symbols=' + sym + '&source=cc406d96ec1cd49f';
+		const url = 'http://markets.ft.com/research/webservices/securities/v1/quotes?symbols=' + sym + '&source=042a7723d770ad6e';
 
 		fetch(url)
 		.then((resp) => resp.json())
@@ -45,13 +43,11 @@ class EquityHighlightApp {
 							<div>Day Change Percent: ${change1DayPercent}%</div>
 						
 						</div>
-						<div id="modsymbolchart"></div>
 				</div>
 			</div>`;
 
 			let insertionPoint = document.getElementsByClassName('o-equity-highlight-app')[0];
-			insertionPoint.insertAdjacentHTML('afterbegin', htmlTemplate);
-			new MOD.SymbolChartApp('#modsymbolchart');
+			insertionPoint.insertAdjacentHTML('afterbegin', htmlTemplate);			
 		})
 		.catch(function(error){
 			console.log("Error retrieving quote data for " + sym + ": " + error);
