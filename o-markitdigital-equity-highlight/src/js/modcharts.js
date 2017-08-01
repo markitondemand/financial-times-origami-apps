@@ -1,5 +1,4 @@
 var $ = require('jquery');
-var d3 = require('./d3.js');
 
 /*!
  * Modcharts v1.0.2a 2016-06-06 

@@ -14,8 +14,8 @@ class EquityHighlightApp {
 	makeQuoteCall(sym){
 		// Make a quote call and then update module with the results.
 		//Need to update to get a valid source key - this one is currently the jump page key and regularly expires.
-		const sourceKey = '042a7723d770ad6e';
-		const quoteService = 'http://markets.ft.com/research/webservices/securities/v1/quotes?symbols=' + sym + '&source=' + sourceKey;
+		const sourceKey = '8fab332e6a'; //using API key created for user sakshi jain
+		const quoteService = 'http://ft.wsodqa.com/research/webservices/securities/v1/quotes?symbols=' + sym + '&source=' + sourceKey;
 		const timeSeriesService = 'http://ft.wsodqa.com/research/webservices/securities/v1/time-series?symbols=' + sym + '&source=' + sourceKey;
 
 		var quoteServiceRequest = fetch(quoteService).then(resp => resp.json());
@@ -36,23 +36,21 @@ class EquityHighlightApp {
 			const timeSeriesDataParams = JSON.stringify(timeSeriesData);
 
 			let htmlTemplate =
-			`<div data-o-component="o-aside-panel" class="o-aside-panel">
-				<div class="o-aside-panel__header">
-					<h3 class="o-aside-panel__heading o-equity-highlight-app__title">Equity highlight</h3>
-				</div>
-				<div class="o-aside-panel__body">
-					<div class="o-equity-highlight-app__content">
-							
-							<a class="o-equity-highlight-app__companyName" href="">${companyName}</a>
-							<div>${symbol}</div>
-						
-							<div>Last Price: ${lastPrice}</div>
-							<div>Currency: ${currency}</div>
-						
-							<div>Day Change: ${change1Day}</div>
-							<div>Day Change Percent: ${change1DayPercent}%</div>
-						
-						</div>
+			`<div class="o-equity-highlight-app--bordered">
+				<h2 class="o-equity-highlight-app__header">Equity highlight</h3>
+				
+				<div class="o-equity-highlight-app__content">
+					<div class="o-equity-highlight-app__symbol">
+						<a class="mod-ui-link o-equity-highlight-app__companyName" href="//ft.wsodqa.com/data/equities/tearsheet/summary?s=${symbol}">${companyName}</a>
+						<span>${symbol}</span>
+					</div>
+					<div class="o-equity-highlight-app__price">${lastPrice}
+							<span>${currency}</span>
+					</div>
+					<div class="o-equity-highlight-app__price-change">
+							<div>Today's Change <span>${change1Day}</span></div>
+							<div>1 Year Change <span>${change1DayPercent}%</span></div>
+					</div>
 						<div id="mod-symbol-chart" data-mod-config=${timeSeriesDataParams}></div>
 				</div>
 				<footer class="mod-module__footer">
