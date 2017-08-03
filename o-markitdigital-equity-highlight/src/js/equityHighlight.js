@@ -14,9 +14,9 @@ class EquityHighlightApp {
 	makeQuoteCall(sym){
 		// Make a quote call and then update module with the results.
 		//Need to update to get a valid source key - this one is currently the jump page key and regularly expires.
-		const sourceKey = '8fab332e6a'; //using API key created for user sakshi jain
-		const quoteService = 'http://ft.wsodqa.com/research/webservices/securities/v1/quotes?symbols=' + sym + '&source=' + sourceKey;
-		const timeSeriesService = 'http://ft.wsodqa.com/research/webservices/securities/v1/time-series?symbols=' + sym + '&source=' + sourceKey;
+		const sourceKey = '86c29104c1'; //using API key created for user sakshi jain
+		const quoteService = 'http://markets.ft.com/research/webservices/securities/v1/quotes?symbols=' + sym + '&source=' + sourceKey;
+		const timeSeriesService = 'http://markets.ft.com/research/webservices/securities/v1/time-series?symbols=' + sym + '&source=' + sourceKey;
 
 		var quoteServiceRequest = fetch(quoteService).then(resp => resp.json());
 		var timeSeriesServiceRequest = fetch(timeSeriesService).then(resp => resp.json());
@@ -36,26 +36,51 @@ class EquityHighlightApp {
 			const timeSeriesDataParams = JSON.stringify(timeSeriesData);
 
 			let htmlTemplate =
-			`<div class="o-equity-highlight-app--bordered">
-				<h2 class="o-equity-highlight-app__header">Equity highlight</h3>
+			// `<div class="o-equity-highlight-app--bordered">
+			// 	<h2 class="o-equity-highlight-app__header">Equity highlight</h3>
 				
-				<div class="o-equity-highlight-app__content">
-					<div class="o-equity-highlight-app__symbol">
-						<a class="mod-ui-link o-equity-highlight-app__companyName" href="//ft.wsodqa.com/data/equities/tearsheet/summary?s=${symbol}">${companyName}</a>
-						<span>${symbol}</span>
-					</div>
-					<div class="o-equity-highlight-app__price">${lastPrice}
-							<span>${currency}</span>
-					</div>
-					<div class="o-equity-highlight-app__price-change">
-							<div>Today's Change <span>${change1Day}</span></div>
-							<div>1 Year Change <span>${change1DayPercent}%</span></div>
-					</div>
+			// 	<div class="o-equity-highlight-app__content">
+			// 		<div class="o-equity-highlight-app__symbol">
+			// 			<a class="mod-ui-link o-equity-highlight-app__companyName" 
+			// 			href="//ft.wsodqa.com/data/equities/tearsheet/summary?s=${symbol}">${companyName}</a>
+			// 			<span>${symbol}</span>
+			// 		</div>
+			// 		<div class="o-equity-highlight-app__price">${lastPrice}
+			// 				<span>${currency}</span>
+			// 		</div>
+			// 		<div class="o-equity-highlight-app__price-change">
+			// 				<div>Today's Change <span>${change1Day}</span></div>
+			// 				<div>1 Year Change <span>${change1DayPercent}%</span></div>
+			// 		</div>
+			// 			<div id="mod-symbol-chart" data-mod-config=${timeSeriesDataParams}></div>
+			// 	</div>
+			// 	<footer class="mod-module__footer">
+			// 		<a class="mod-ui-link" href="//ft.wsodqa.com/data/equities">View more equities</a>
+			// 	</footer>
+			// </div>
+			
+			`<div class="demo-container demo-container--standout">
+			
+				<h3 class="o-equity-highlight-app__header">Equity highlight</h3>
+				<div class="o-card o-card--standout o-card--image-" data-o-component="o-card">
+					<div class="o-card__content">
+						<div class="o-equity-highlight-app__symbol o-card__meta">
+							<a href="https://markets.ft.com/data/equities/tearsheet/summary?s=${symbol}" class="mod-ui-link o-card__tag">${companyName}</a>
+							<span>${symbol}</span>
+						</div>
+						<div class="o-equity-highlight-app__price">${lastPrice}
+								<span>${currency}</span>
+						</div>
+						<div class="o-equity-highlight-app__price-change">
+								<div>Today's Change <span>${change1Day}</span></div>
+								<div>1 Year Change <span>${change1DayPercent}%</span></div>
+						</div>
 						<div id="mod-symbol-chart" data-mod-config=${timeSeriesDataParams}></div>
+					</div>
+					<div class="o-card__image o-card__image--">
+					</div>
+					<a class="mod-ui-link" href="https://markets.ft.com/data/equities">View more equities</a>
 				</div>
-				<footer class="mod-module__footer">
-					<a class="mod-ui-link" href="//ft.wsodqa.com/data/equities">View more equities</a>
-				</footer>
 			</div>`;
 
 			let insertionPoint = document.getElementsByClassName('o-equity-highlight-app')[0];
