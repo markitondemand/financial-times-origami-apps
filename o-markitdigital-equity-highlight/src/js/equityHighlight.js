@@ -1,6 +1,4 @@
 require('mustache');
-require('./modcharts.js');
-require('./symbolChart.js');
 
 class EquityHighlightApp {
 
@@ -18,14 +16,14 @@ class EquityHighlightApp {
 		const quoteService = 'http://markets.ft.com/research/webservices/securities/v1/quotes?symbols=' + sym + '&source=' + sourceKey;
 		const timeSeriesService = 'http://markets.ft.com/research/webservices/securities/v1/time-series?symbols=' + sym + '&source=' + sourceKey;
 
-		var quoteServiceRequest = fetch(quoteService).then(resp => resp.json());
-		var timeSeriesServiceRequest = fetch(timeSeriesService).then(resp => resp.json());
+		let quoteServiceRequest = fetch(quoteService).then(resp => resp.json());
+		let timeSeriesServiceRequest = fetch(timeSeriesService).then(resp => resp.json());
 
 		Promise.all([quoteServiceRequest, timeSeriesServiceRequest])
 		.then(function(resp){
-			if(resp != null && resp.length > 1) {
-			var quoteData = resp[0]["data"];
-			var timeSeriesData = resp[1]["data"]["items"][0]["timeSeries"]["timeSeriesData"];
+			if(resp !== null && resp.length > 1) {
+			let quoteData = resp[0]["data"];
+			//let timeSeriesData = resp[1]["data"]["items"][0]["timeSeries"]["timeSeriesData"];
 
 			const companyName = quoteData.items[0].basic.name;
 			const symbol = quoteData.items[0].basic.symbol;
@@ -33,39 +31,16 @@ class EquityHighlightApp {
 			const currency = quoteData.items[0].basic.currency;
 			const change1Day = quoteData.items[0].quote.change1Day.toFixed(2);
 			const change1DayPercent = quoteData.items[0].quote.change1DayPercent.toFixed(2);
-			const timeSeriesDataParams = JSON.stringify(timeSeriesData);
+			//const timeSeriesDataParams = JSON.stringify(timeSeriesData);
 
 			let htmlTemplate =
-			// `<div class="o-equity-highlight-app--bordered">
-			// 	<h2 class="o-equity-highlight-app__header">Equity highlight</h3>
-				
-			// 	<div class="o-equity-highlight-app__content">
-			// 		<div class="o-equity-highlight-app__symbol">
-			// 			<a class="mod-ui-link o-equity-highlight-app__companyName" 
-			// 			href="//ft.wsodqa.com/data/equities/tearsheet/summary?s=${symbol}">${companyName}</a>
-			// 			<span>${symbol}</span>
-			// 		</div>
-			// 		<div class="o-equity-highlight-app__price">${lastPrice}
-			// 				<span>${currency}</span>
-			// 		</div>
-			// 		<div class="o-equity-highlight-app__price-change">
-			// 				<div>Today's Change <span>${change1Day}</span></div>
-			// 				<div>1 Year Change <span>${change1DayPercent}%</span></div>
-			// 		</div>
-			// 			<div id="mod-symbol-chart" data-mod-config=${timeSeriesDataParams}></div>
-			// 	</div>
-			// 	<footer class="mod-module__footer">
-			// 		<a class="mod-ui-link" href="//ft.wsodqa.com/data/equities">View more equities</a>
-			// 	</footer>
-			// </div>
-			
 			`<div class="demo-container demo-container--standout">
-			
-				<h3 class="o-equity-highlight-app__header">Equity highlight</h3>
-				<div class="o-card o-card--standout o-card--image-" data-o-component="o-card">
+				<div class="o-card o-card--standout o-card--image-" data-o-component="o-card">					
 					<div class="o-card__content">
+						<h2 class="o-card__heading">Equity highlight</h2>
+				
 						<div class="o-equity-highlight-app__symbol o-card__meta">
-							<a href="https://markets.ft.com/data/equities/tearsheet/summary?s=${symbol}" class="mod-ui-link o-card__tag">${companyName}</a>
+							<a href="https://markets.ft.com/data/equities/tearsheet/summary?s=${symbol}" class="o-card__tag">${companyName}</a>
 							<span>${symbol}</span>
 						</div>
 						<div class="o-equity-highlight-app__price">${lastPrice}
@@ -75,17 +50,16 @@ class EquityHighlightApp {
 								<div>Today's Change <span>${change1Day}</span></div>
 								<div>1 Year Change <span>${change1DayPercent}%</span></div>
 						</div>
-						<div id="mod-symbol-chart" data-mod-config=${timeSeriesDataParams}></div>
-					</div>
-					<div class="o-card__image o-card__image--">
-					</div>
-					<a class="mod-ui-link" href="https://markets.ft.com/data/equities">View more equities</a>
+						<div class="o-equity-highlight-app__symbol o-card__meta">
+							<a href="https://markets.ft.com/data/equities" class="o-card__tag">View more equities</a>
+						</div>
+					</div>					
 				</div>
 			</div>`;
 
 			let insertionPoint = document.getElementsByClassName('o-equity-highlight-app')[0];
 			insertionPoint.insertAdjacentHTML('afterbegin', htmlTemplate);
-			//new MOD.SymbolChartApp('#mod-symbol-chart');
+						
 			}
 		})
 		.catch(function(error){
