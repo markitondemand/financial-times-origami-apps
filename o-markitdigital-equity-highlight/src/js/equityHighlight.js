@@ -31,27 +31,37 @@ class EquityHighlightApp {
 			const currency = quoteData.items[0].basic.currency;
 			const change1Day = quoteData.items[0].quote.change1Day.toFixed(2);
 			const change1DayPercent = quoteData.items[0].quote.change1DayPercent.toFixed(2);
+			const change1WeekPercent = quoteData.items[0].quote.change1WeekPercent.toFixed(2);
 			//const timeSeriesDataParams = JSON.stringify(timeSeriesData);
 
 			let htmlTemplate =
 			`<div class="demo-container demo-container--standout">
 				<div class="o-card o-card--standout o-card--image-" data-o-component="o-card">					
 					<div class="o-card__content">
-						<h2 class="o-card__heading">Equity highlight</h2>
-				
+						<h2 class="o-equity-highlight-app__header">Equity highlight</h2>
 						<div class="o-equity-highlight-app__symbol o-card__meta">
-							<a href="https://markets.ft.com/data/equities/tearsheet/summary?s=${symbol}" class="o-card__tag">${companyName}</a>
-							<span>${symbol}</span>
+							<a href="https://markets.ft.com/data/equities/tearsheet/summary?s=${symbol}" 
+							class="o-card__tag">${companyName}</a>
+							<span class="o-equity-highlight-app__timestamp">${symbol}</span>
 						</div>
 						<div class="o-equity-highlight-app__price">${lastPrice}
-								<span>${currency}</span>
+								<span class="o-equity-highlight-app__timestamp">${currency}</span>
 						</div>
+						<div class="o-equity-highlight-app__border"></div>
 						<div class="o-equity-highlight-app__price-change">
-								<div>Today's Change <span>${change1Day}</span></div>
-								<div>1 Year Change <span>${change1DayPercent}%</span></div>
+							Today's Change 
+							<span  class="o-equity-highlight-app__timestamp">${change1Day}/${change1DayPercent}%</span>
 						</div>
-						<div class="o-equity-highlight-app__symbol o-card__meta">
-							<a href="https://markets.ft.com/data/equities" class="o-card__tag">View more equities</a>
+						<div class="o-equity-highlight-app__price-change--1week">
+							1 Week Change 
+							<span  class="o-equity-highlight-app__timestamp">${change1WeekPercent}%</span>
+						</div>
+						<div class="o-equity-highlight-app__border"></div>
+						<div class="o-teaser-collection">
+							<h2 class="o-teaser-collection__heading">
+								<a class="o-teaser-collection__heading-link" 
+								href="https://markets.ft.com/data/equities">View more equities</a>
+							</h2>
 						</div>
 					</div>					
 				</div>

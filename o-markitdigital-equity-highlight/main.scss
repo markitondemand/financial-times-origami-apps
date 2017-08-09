@@ -1,5 +1,7 @@
 // Output grid helper classes and data-attributes
 $o-card-is-silent: false;
+$o-teaser-is-silent: false;
+$o-teaser-collection-is-silent: false;
 
 @import 'src/scss/variables';
 
@@ -7,6 +9,8 @@ $o-card-is-silent: false;
 @import 'o-fonts/main';
 @import 'o-typography/main';
 @import 'o-card/main';
+@import 'o-teaser/main';
+@import 'o-teaser-collection/main';
 
 @if $o-equity-highlight-app-is-silent == false {
 
@@ -17,9 +21,11 @@ $o-card-is-silent: false;
         @include oColorsFor(page);
         font-family: oFontsGetFontFamilyWithFallbacks(FinancierDisplayWeb);
         width: 260px;
-        height: 216px;
+        height: 200px;
 
-        div {
+        div, 
+        span, 
+        a {
              margin: 0;
         }
 
@@ -30,10 +36,8 @@ $o-card-is-silent: false;
             font-weight: oFontsWeight(normal);
         }
 
-        &--bordered {
-            position: relative;
-            border: 1px solid #d3c5b4;
-            padding: 15px;
+        &__border {
+            border-bottom: 1px solid #cec6b9;
         }
 
         &__content {
@@ -41,14 +45,21 @@ $o-card-is-silent: false;
         }
 
         &__header {
-            font: 500 19px FinancierDisplayWeb;
-            color: #333333;
-            background-color: #fff1e0;
-            display: inline-block;
-            position: absolute;
-            left: 20px;
-            top: -10px;
-            padding: 0 5px;
+            font-size: 18px;
+            line-height: 20px;
+            font-family: MetricWeb,sans-serif;
+            margin: 0 0 20px;
+            font-weight: 700;
+
+            &:after {
+                content: "";
+                display: block;
+                width: 60px;
+                margin-top: 5px;
+                border-bottom: 4px solid #000000;
+                position: absolute;
+                z-index: 1;
+            }
         }
         
         &__footer {
@@ -56,45 +67,57 @@ $o-card-is-silent: false;
         }
 
         &__symbol {
-            width: 75%;
+            width: 60%;
             display: inline-block;
-            font: 600 18px/20px MetricWeb,sans-serif;
         }
 
         &__price {
             text-align: right;
-            width: 25%;
+            width: 40%;
             font: 600 18px/20px MetricWeb,sans-serif;
             float: right;
         }
 
-        &__price-change {
+        &__price-change,
+        &__price-change--1week {
+            width: 60%;
+            display: inline-block;
             margin-top: 8px;
             padding-top: 6px;
             border-top: 1px solid #e9decf;
-            display: block;
             font: 500 13px/16px MetricWeb,sans-serif;
             color: #333333;
-            text-transform: uppercase;
+            text-transform: uppercase;            
         }
 
-        span {
-                display: block;
-                color: #8b572a;
-                text-transform: uppercase;
-                font: normal 12px MetricWeb,sans-serif;
-            }
-        
-        .mod-ui-link {
-            color: #9e2f50;
-            text-decoration: none;
-            cursor: pointer;
-            padding-top: 10px;
-            border-top: 1px solid #e9decf;
+        &__price-change--1week {
+            text-align: right;
+            width: 40%;
+            float: right;
+        }
+
+        &__timestamp {
             display: block;
-            font: 600 16px MetricWeb,sans-serif;
+            color: #66605c;
+            text-transform: uppercase;
+            font: normal 12px MetricWeb,sans-serif;
+            line-height: 20px;
         }
-
     }
 
+    //origami overrides
+
+    .o-teaser-collection__heading {
+        font-size: 16px;
+
+        &:before,
+        &:after {
+            border: 0px;
+        }
+        a:after {
+            height: 26px;
+            width: 26px;
+        }
+    }
 }
+
