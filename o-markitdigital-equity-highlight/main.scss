@@ -1,11 +1,15 @@
 // Output grid helper classes and data-attributes
+
+$o-typography-is-silent: false;
+$o-fonts-is-silent: false;
+$o-colors-is-silent: false;
 $o-card-is-silent: false;
 $o-teaser-is-silent: false;
 $o-teaser-collection-is-silent: false;
 
 @import 'src/scss/variables';
 
-@import "o-colors/main";
+@import 'o-colors/main';
 @import 'o-fonts/main';
 @import 'o-typography/main';
 @import 'o-card/main';
