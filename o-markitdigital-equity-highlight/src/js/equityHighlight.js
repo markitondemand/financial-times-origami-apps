@@ -6,18 +6,18 @@ class EquityHighlightApp {
 		this.rootEl = rootEl;
 		const symbolParam = rootEl.getAttribute('data-o-equity-highlight-app-symbol');
 
-		this.makeQuoteCall(symbolParam);
+		this.getData(symbolParam);
 	}
 
-	makeQuoteCall(sym){
-		// Make a quote call and then update module with the results.
-		//Need to update to get a valid source key - this one is currently the jump page key and regularly expires.
+	getData(sym){
+		
 		const sourceKey = '86c29104c1'; //using API key created for user sakshi jain
 		const quoteService = 'http://markets.ft.com/research/webservices/securities/v1/quotes?symbols=' + sym + '&source=' + sourceKey;
 		const timeSeriesService = 'http://markets.ft.com/research/webservices/securities/v1/time-series?symbols=' + sym + '&source=' + sourceKey;
 
 		let quoteServiceRequest = fetch(quoteService).then(resp => resp.json());
 		let timeSeriesServiceRequest = fetch(timeSeriesService).then(resp => resp.json());
+		const getFormatColorClass = this.getFormatColorClass;
 
 		Promise.all([quoteServiceRequest, timeSeriesServiceRequest])
 		.then(function(resp){
@@ -50,11 +50,13 @@ class EquityHighlightApp {
 						<div class="o-equity-highlight-app__border"></div>
 						<div class="o-equity-highlight-app__price-change">
 							Today's Change 
-							<span  class="o-equity-highlight-app__timestamp">${change1Day}/${change1DayPercent}%</span>
+							<span  class="${getFormatColorClass(change1Day)}">
+							${change1Day}/${change1DayPercent}%</span>
 						</div>
 						<div class="o-equity-highlight-app__price-change--1week">
 							1 Week Change 
-							<span  class="o-equity-highlight-app__timestamp">${change1WeekPercent}%</span>
+							<span  class="${getFormatColorClass(change1WeekPercent)}">
+							${change1WeekPercent}%</span>
 						</div>
 						<div class="o-equity-highlight-app__border"></div>
 						<div class="o-teaser-collection">
@@ -73,8 +75,12 @@ class EquityHighlightApp {
 			}
 		})
 		.catch(function(error){
-			console.log("Error retrieving quote data for " + sym + ": " + error);
+			console.log("Error retrieving data for " + sym + ": " + error);
 		});
+	}
+
+	getFormatColorClass(val){
+		return parseFloat(val) >= 0 ? "mod-format--pos" : "mod-format--neg";
 	}
 
 	static init (rootEl, opts) {
