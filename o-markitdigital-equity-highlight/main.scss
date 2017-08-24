@@ -1,4 +1,6 @@
 // Output grid helper classes and data-attributes
+$o-card-is-silent: false;
+
 @import 'src/scss/variables';
 
 @import 'o-colors/main';
@@ -15,7 +17,7 @@
     .o-equity-highlight-app {
         display: block;
         @include oColorsFor(page);
-        font-family: oFontsGetFontFamilyWithFallbacks(FinancierDisplayWeb);
+        font-family: oFontsGetFontFamilyWithFallbacks(MetricWeb);
         width: 260px;
         height: 200px;
 
@@ -41,11 +43,13 @@
         }
 
         &__header {
-            font-size: 18px;
-            line-height: 20px;
-            font-family: MetricWeb,sans-serif;
+            //font-size: 18px;
+            //line-height: 20px;
+            //font-family: MetricWeb,sans-serif;
+            @include oTypographySans($scale: 1, $progressive: false);
             margin: 0 0 20px;
-            font-weight: 700;
+            //font-weight: 700;
+            font-weight: oFontsWeight(bold);
 
             &:after {
                 content: "";
@@ -58,10 +62,6 @@
             }
         }
         
-        &__footer {
-            font-family: MetricWeb,sans-serif;
-        }
-
         &__symbol {
             width: 60%;
             display: inline-block;
@@ -70,7 +70,9 @@
         &__price {
             text-align: right;
             width: 40%;
-            font: 600 18px/20px MetricWeb,sans-serif;
+            //font: 600 18px/20px MetricWeb,sans-serif;
+            @include oTypographySans($scale: 1, $progressive: false);
+            font-weight: oFontsWeight(medium);
             float: right;
         }
 
@@ -81,8 +83,13 @@
             margin-top: 8px;
             padding-top: 6px;
             border-top: 1px solid #e9decf;
-            font: 500 13px/16px MetricWeb,sans-serif;
-            color: #333333;
+            //font: 500 13px/16px MetricWeb,sans-serif;
+            //color: #333333;
+            @include oTypographyMargin($top: 2);
+            @include oTypographyPadding($top: 1.5);
+            @include oColorsFor('div', text, 80);
+            @include oTypographySans($scale: -1, $progressive: false);
+            font-weight: oFontsWeight(medium);
             text-transform: uppercase;            
         }
 
@@ -96,7 +103,9 @@
             display: block;
             color: #66605c;
             text-transform: uppercase;
-            font: normal 12px MetricWeb,sans-serif;
+            //font: normal 12px MetricWeb,sans-serif;
+            @include oTypographySans($scale: -2, $line-height: 20, $progressive: false);
+            font-weight: oFontsWeight(normal);
             line-height: 20px;
         }
     }
