@@ -13,17 +13,17 @@ class EquityHighlightApp {
 		
 		const sourceKey = '86c29104c1'; //using API key created for user sakshi jain
 		const quoteService = 'http://markets.ft.com/research/webservices/securities/v1/quotes?symbols=' + sym + '&source=' + sourceKey;
-		const timeSeriesService = 'http://markets.ft.com/research/webservices/securities/v1/time-series?symbols=' + sym + '&source=' + sourceKey;
+		const chartService = 'http://ft.wsodqa.com/Research/InteractiveChart/PriceVolumeChart?symbol=' + sym + '&source=' + sourceKey;
 
 		let quoteServiceRequest = fetch(quoteService).then(resp => resp.json());
-		let timeSeriesServiceRequest = fetch(timeSeriesService).then(resp => resp.json());
+		let chartServiceRequest = fetch(chartService).then(resp => resp.json());
 		const getFormatColorClass = this.getFormatColorClass;
 
-		Promise.all([quoteServiceRequest, timeSeriesServiceRequest])
+		Promise.all([quoteServiceRequest, chartServiceRequest])
 		.then(function(resp){
 			if(resp !== null && resp.length > 1) {
 			let quoteData = resp[0]["data"];
-			//let timeSeriesData = resp[1]["data"]["items"][0]["timeSeries"]["timeSeriesData"];
+			let chartData = resp[1].json.data;
 
 			const companyName = quoteData.items[0].basic.name;
 			const symbol = quoteData.items[0].basic.symbol;
@@ -32,7 +32,6 @@ class EquityHighlightApp {
 			const change1Day = quoteData.items[0].quote.change1Day.toFixed(2);
 			const change1DayPercent = quoteData.items[0].quote.change1DayPercent.toFixed(2);
 			const change1WeekPercent = quoteData.items[0].quote.change1WeekPercent.toFixed(2);
-			//const timeSeriesDataParams = JSON.stringify(timeSeriesData);
 
 			let htmlTemplate =
 			`<div class="demo-container demo-container--standout">
@@ -65,7 +64,10 @@ class EquityHighlightApp {
 								href="https://markets.ft.com/data/equities">View more equities</a>
 							</h2>
 						</div>
-					</div>					
+					</div>
+					<div class="o-card__image o-card__image--">
+						<img src="${chartData}" alt="demo image"></img>
+					</div>				
 				</div>
 			</div>`;
 
