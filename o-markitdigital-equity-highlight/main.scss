@@ -3,98 +3,109 @@ $o-card-is-silent: false;
 
 @import 'src/scss/variables';
 
-@import "o-colors/main";
+@import 'o-colors/main';
 @import 'o-fonts/main';
 @import 'o-typography/main';
 @import 'o-card/main';
+@import 'o-teaser/main';
+@import 'o-teaser-collection/main';
 
-@if $o-equity-highlight-app-is-silent == false {
+@if ($o-equity-highlight-app-is-silent == false) {
 
     @include oFontsIncludeAll();
 
-    .o-equity-highlight-app {
-        display: block;
+    .o-equity-highlight-app {        
         @include oColorsFor(page);
-        font-family: oFontsGetFontFamilyWithFallbacks(FinancierDisplayWeb);
+        font-family: oFontsGetFontFamilyWithFallbacks(MetricWeb);
+        display: block;
         width: 260px;
-        height: 216px;
+        height: 200px;
 
-        div {
-             margin: 0;
+        div, 
+        span, 
+        a {             
+             @include oTypographyMargin($top: 0, $bottom: 0);
         }
 
-        &__companyName {
-            @include oTypographyDisplay(2);
-            @include oColorsFor('o-teaser', text, 80);
-            @include oTypographyMargin($top: 0, $bottom: 0);
-            font-weight: oFontsWeight(normal);
+        &__border {
+            border-bottom: 1px solid oColorsGetPaletteColor('black-20');
         }
 
-        &--bordered {
-            position: relative;
-            border: 1px solid #d3c5b4;
-            padding: 15px;
-        }
+        &__header {           
+            @include oTypographySans($scale: 1, $progressive: false);        
+            @include oTypographyMargin($top: 0, $bottom: 5);          
+            font-weight: oFontsWeight(bold);
 
-        &__content {
-            padding: 10px 0 0;
-        }
-
-        &__header {
-            font: 500 19px FinancierDisplayWeb;
-            color: #333333;
-            background-color: #fff1e0;
-            display: inline-block;
-            position: absolute;
-            left: 20px;
-            top: -10px;
-            padding: 0 5px;
+            &:after {
+                @include oTypographyMargin($top: 1, $bottom: 0);
+                border-bottom: 4px solid oColorsGetPaletteColor('black');
+                content: "";
+                display: block;
+                width: 60px;                
+                position: absolute;
+                z-index: 1;
+            }
         }
         
-        &__footer {
-            font-family: MetricWeb,sans-serif;
-        }
-
         &__symbol {
-            width: 75%;
+            width: 60%;
             display: inline-block;
-            font: 600 18px/20px MetricWeb,sans-serif;
         }
 
         &__price {
+            @include oTypographySans($scale: 1, $progressive: false);
+            font-weight: oFontsWeight(medium);            
+            width: 40%;
+            float: right;
             text-align: right;
-            width: 25%;
-            font: 600 18px/20px MetricWeb,sans-serif;
+        }
+
+        &__price-change,
+        &__price-change--1week {            
+            @include oTypographyMargin($top: 2);
+            @include oTypographyPadding($top: 1.5);
+            @include oColorsFor('div', text, 80);
+            @include oTypographySans($scale: -1, $progressive: false);
+            font-weight: oFontsWeight(medium);
+            width: 60%;
+            display: inline-block;
+            text-transform: uppercase;  
+        }
+
+        &__price-change--1week {
+            text-align: right;
+            width: 40%;
             float: right;
         }
 
-        &__price-change {
-            margin-top: 8px;
-            padding-top: 6px;
-            border-top: 1px solid #e9decf;
-            display: block;
-            font: 500 13px/16px MetricWeb,sans-serif;
-            color: #333333;
+        &__timestamp {           
+            @include oTypographySans($scale: -2, $line-height: 20px, $progressive: false);
+            font-weight: oFontsWeight(normal);
+            color: oColorsGetPaletteColor('black-60');
+            display: block;   
             text-transform: uppercase;
         }
-
-        span {
-                display: block;
-                color: #8b572a;
-                text-transform: uppercase;
-                font: normal 12px MetricWeb,sans-serif;
-            }
-        
-        .mod-ui-link {
-            color: #9e2f50;
-            text-decoration: none;
-            cursor: pointer;
-            padding-top: 10px;
-            border-top: 1px solid #e9decf;
-            display: block;
-            font: 600 16px MetricWeb,sans-serif;
-        }
-
     }
 
+    //origami overrides
+
+    .o-teaser-collection__heading {
+        font-size: 16px;
+
+        &:before,
+        &:after {
+            border: 0px;
+        }
+        a:after {
+            height: 26px;
+            width: 26px;
+        }
+    }
+
+    .mod-format--pos {
+        color: #458b00;
+    }
+    .mod-format--neg {
+        color: #c00000;
+    }
 }
