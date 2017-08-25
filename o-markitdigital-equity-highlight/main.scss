@@ -23,40 +23,25 @@ $o-card-is-silent: false;
 
         div, 
         span, 
-        a {
-             margin: 0;
-        }
-
-        &__companyName {
-            @include oTypographyDisplay(2);
-            @include oColorsFor('o-teaser', text, 80);
-            @include oTypographyMargin($top: 0, $bottom: 0);
-            font-weight: oFontsWeight(normal);
+        a {             
+             @include oTypographyMargin($top: 0, $bottom: 0);
         }
 
         &__border {
-            border-bottom: 1px solid #cec6b9;
+            border-bottom: 1px solid oColorsGetPaletteColor('black-20');
         }
 
-        &__content {
-            padding: 10px 0 0;
-        }
-
-        &__header {
-            //font-size: 18px;
-            //line-height: 20px;
-            //font-family: MetricWeb,sans-serif;
-            @include oTypographySans($scale: 1, $progressive: false);
-            margin: 0 0 20px;
-            //font-weight: 700;
+        &__header {           
+            @include oTypographySans($scale: 1, $progressive: false);        
+            @include oTypographyMargin($top: 0, $bottom: 5);          
             font-weight: oFontsWeight(bold);
 
             &:after {
                 content: "";
                 display: block;
                 width: 60px;
-                margin-top: 5px;
-                border-bottom: 4px solid #000000;
+                @include oTypographyMargin($top: 1, $bottom: 0);
+                border-bottom: 4px solid oColorsGetPaletteColor('black');
                 position: absolute;
                 z-index: 1;
             }
@@ -69,22 +54,16 @@ $o-card-is-silent: false;
 
         &__price {
             text-align: right;
-            width: 40%;
-            //font: 600 18px/20px MetricWeb,sans-serif;
+            width: 40%;   
+            float: right;        
             @include oTypographySans($scale: 1, $progressive: false);
             font-weight: oFontsWeight(medium);
-            float: right;
         }
 
         &__price-change,
         &__price-change--1week {
             width: 60%;
             display: inline-block;
-            margin-top: 8px;
-            padding-top: 6px;
-            border-top: 1px solid #e9decf;
-            //font: 500 13px/16px MetricWeb,sans-serif;
-            //color: #333333;
             @include oTypographyMargin($top: 2);
             @include oTypographyPadding($top: 1.5);
             @include oColorsFor('div', text, 80);
@@ -100,13 +79,11 @@ $o-card-is-silent: false;
         }
 
         &__timestamp {
-            display: block;
-            color: #66605c;
+            display: block;   
             text-transform: uppercase;
-            //font: normal 12px MetricWeb,sans-serif;
-            @include oTypographySans($scale: -2, $line-height: 20, $progressive: false);
+            @include oTypographySans($scale: -2, $line-height: 20px, $progressive: false);
             font-weight: oFontsWeight(normal);
-            line-height: 20px;
+            color: oColorsGetPaletteColor('black-60');
         }
     }
 
