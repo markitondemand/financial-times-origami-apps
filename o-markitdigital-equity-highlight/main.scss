@@ -14,10 +14,10 @@ $o-card-is-silent: false;
 
     @include oFontsIncludeAll();
 
-    .o-equity-highlight-app {
-        display: block;
+    .o-equity-highlight-app {        
         @include oColorsFor(page);
         font-family: oFontsGetFontFamilyWithFallbacks(MetricWeb);
+        display: block;
         width: 260px;
         height: 200px;
 
@@ -37,11 +37,11 @@ $o-card-is-silent: false;
             font-weight: oFontsWeight(bold);
 
             &:after {
-                content: "";
-                display: block;
-                width: 60px;
                 @include oTypographyMargin($top: 1, $bottom: 0);
                 border-bottom: 4px solid oColorsGetPaletteColor('black');
+                content: "";
+                display: block;
+                width: 60px;                
                 position: absolute;
                 z-index: 1;
             }
@@ -53,23 +53,23 @@ $o-card-is-silent: false;
         }
 
         &__price {
-            text-align: right;
-            width: 40%;   
-            float: right;        
             @include oTypographySans($scale: 1, $progressive: false);
-            font-weight: oFontsWeight(medium);
+            font-weight: oFontsWeight(medium);            
+            width: 40%;
+            float: right;
+            text-align: right;
         }
 
         &__price-change,
-        &__price-change--1week {
-            width: 60%;
-            display: inline-block;
+        &__price-change--1week {            
             @include oTypographyMargin($top: 2);
             @include oTypographyPadding($top: 1.5);
             @include oColorsFor('div', text, 80);
             @include oTypographySans($scale: -1, $progressive: false);
             font-weight: oFontsWeight(medium);
-            text-transform: uppercase;            
+            width: 60%;
+            display: inline-block;
+            text-transform: uppercase;  
         }
 
         &__price-change--1week {
@@ -78,12 +78,12 @@ $o-card-is-silent: false;
             float: right;
         }
 
-        &__timestamp {
-            display: block;   
-            text-transform: uppercase;
+        &__timestamp {           
             @include oTypographySans($scale: -2, $line-height: 20px, $progressive: false);
             font-weight: oFontsWeight(normal);
             color: oColorsGetPaletteColor('black-60');
+            display: block;   
+            text-transform: uppercase;
         }
     }
 
@@ -109,4 +109,3 @@ $o-card-is-silent: false;
         color: #c00000;
     }
 }
-
