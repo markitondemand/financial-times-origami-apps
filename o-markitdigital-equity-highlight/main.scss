@@ -65,16 +65,15 @@ $o-card-is-silent: false;
             @include oTypographyMargin($top: 2);
             @include oTypographyPadding($top: 1.5);
             @include oColorsFor('div', text, 80);
-            @include oTypographySans($scale: -1, $progressive: false);
+            @include oTypographySans($scale: -2, $progressive: false);
             font-weight: oFontsWeight(medium);
-            width: 60%;
+            width: 50%;
             display: inline-block;
             text-transform: uppercase;  
         }
 
         &__price-change--1week {
             text-align: right;
-            width: 40%;
             float: right;
         }
 
@@ -84,6 +83,11 @@ $o-card-is-silent: false;
             color: oColorsGetPaletteColor('black-60');
             display: block;   
             text-transform: uppercase;
+        }
+
+        &__chart-image {
+            max-width: 240px;
+            @include oTypographyMargin($top: 3);
         }
     }
 

@@ -57,6 +57,7 @@ class EquityHighlightApp {
 							<span  class="${getFormatColorClass(change1WeekPercent)}">
 							${change1WeekPercent}%</span>
 						</div>
+						<img src="${chartData}" alt="demo image" class="o-equity-highlight-app__chart-image"></img>
 						<div class="o-equity-highlight-app__border"></div>
 						<div class="o-teaser-collection">
 							<h2 class="o-teaser-collection__heading">
@@ -64,10 +65,7 @@ class EquityHighlightApp {
 								href="https://markets.ft.com/data/equities">View more equities</a>
 							</h2>
 						</div>
-					</div>
-					<div class="o-card__image o-card__image--">
-						<img src="${chartData}" alt="demo image"></img>
-					</div>				
+					</div>									
 				</div>
 			</div>`;
 
