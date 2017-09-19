@@ -34,17 +34,17 @@ class EquityHighlightApp {
 			const change1WeekPercent = quoteData.items[0].quote.change1WeekPercent.toFixed(2);
 
 			let htmlTemplate =
-			`<div class="demo-container demo-container--standout">
-				<div class="o-card o-card--standout o-card--image-" data-o-component="o-card">					
-					<div class="o-card__content">
+			`<div class="o-grid-container demo-container">
+				<div class="o-teaser" data-o-component="o-teaser">				
+					<div class="o-teaser__content">
 						<h2 class="o-equity-highlight-app__header">Equity highlight</h2>
-						<div class="o-equity-highlight-app__symbol o-card__meta">
+						<div class="o-equity-highlight-app__symbol o-teaser__meta">
 							<a href="https://markets.ft.com/data/equities/tearsheet/summary?s=${symbol}" 
-							class="o-card__tag">${companyName}</a>
-							<span class="o-equity-highlight-app__timestamp">${symbol}</span>
+							class="o-teaser__tag">${companyName}</a>
+							<time data-o-component="o-date" class="o-date o-teaser__timestamp">${symbol}</time>							
 						</div>
 						<div class="o-equity-highlight-app__price">${lastPrice}
-								<span class="o-equity-highlight-app__timestamp">${currency}</span>
+							<time data-o-component="o-date" class="o-date o-teaser__timestamp">${currency}</time>								
 						</div>
 						<div class="o-equity-highlight-app__border"></div>
 						<div class="o-equity-highlight-app__price-change">
