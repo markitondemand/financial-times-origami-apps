@@ -1,3 +1,8 @@
 {
-    "symbol": "MSFT"
+    "symbol": "MSFT",
+    "env" : "acceptance",
+    "sourceKey" : {
+        "localhost" : "7b538882f3d4366a",
+        "acceptance" : "7b538882f3d4366a"
+    }
 }
