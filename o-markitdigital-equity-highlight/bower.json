@@ -17,7 +17,6 @@
     "o-fonts": "^3.0.0",
     "o-grid":"^4.3.3",
     "o-typography":"^5.0.2",
-    "o-card": "^3.0.0",
     "o-teaser": "^2.1.4",
     "o-teaser-collection": "^2.0.5"
   }

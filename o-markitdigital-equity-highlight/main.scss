@@ -1,25 +1,21 @@
 // Output grid helper classes and data-attributes
-$o-card-is-silent: false;
-
+$o-grid-is-silent: false;
+$o-teaser-is-silent: false;
 @import 'src/scss/variables';
 
 @import 'o-colors/main';
 @import 'o-fonts/main';
 @import 'o-typography/main';
-@import 'o-card/main';
 @import 'o-teaser/main';
 @import 'o-teaser-collection/main';
+@import 'o-grid/main';
 
 @if ($o-equity-highlight-app-is-silent == false) {
 
     @include oFontsIncludeAll();
 
-    .o-equity-highlight-app {        
-        @include oColorsFor(page);
-        font-family: oFontsGetFontFamilyWithFallbacks(MetricWeb);
-        display: block;
-        width: 260px;
-        height: 200px;
+    .o-equity-highlight-app {
+        font-family: oFontsGetFontFamilyWithFallbacks(MetricWeb);        
 
         div, 
         span, 
@@ -28,17 +24,18 @@ $o-card-is-silent: false;
         }
 
         &__border {
-            border-bottom: 1px solid oColorsGetPaletteColor('black-20');
+            border-bottom: oTypographySpacingSize($units: 0.25) solid oColorsGetPaletteColor('black-20');
         }
 
         &__header {           
             @include oTypographySans($scale: 1, $progressive: false);        
-            @include oTypographyMargin($top: 0, $bottom: 5);          
+            @include oTypographyMargin($top: 0, $bottom: 5);
+            @include oTypographyPadding($top: 2.5, $bottom: 2.5);
             font-weight: oFontsWeight(bold);
 
             &:after {
                 @include oTypographyMargin($top: 1, $bottom: 0);
-                border-bottom: 4px solid oColorsGetPaletteColor('black');
+                border-bottom: oTypographySpacingSize($units: 1) solid oColorsGetPaletteColor('black');
                 content: "";
                 display: block;
                 width: 60px;                
@@ -75,18 +72,10 @@ $o-card-is-silent: false;
         &__price-change--1week {
             text-align: right;
             float: right;
-        }
-
-        &__timestamp {           
-            @include oTypographySans($scale: -2, $line-height: 20px, $progressive: false);
-            font-weight: oFontsWeight(normal);
-            color: oColorsGetPaletteColor('black-60');
-            display: block;   
-            text-transform: uppercase;
-        }
+        }       
 
         &__chart-image {
-            max-width: 240px;
+            max-width: 230px;
             @include oTypographyMargin($top: 3);
         }
     }
@@ -94,7 +83,7 @@ $o-card-is-silent: false;
     //origami overrides
 
     .o-teaser-collection__heading {
-        font-size: 16px;
+        @include oTypographySans($scale: 0);
 
         &:before,
         &:after {
@@ -104,6 +93,10 @@ $o-card-is-silent: false;
             height: 26px;
             width: 26px;
         }
+    }
+    .o-grid-container {
+        max-width: 260px;
+        background-color: oColorsGetPaletteColor('wheat');
     }
 
     .mod-format--pos {
