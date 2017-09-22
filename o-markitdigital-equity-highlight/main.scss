@@ -3,12 +3,14 @@
 @import 'o-fonts/main';
 @import 'o-typography/main';
 @import 'o-teaser/main';
-@import 'o-teaser-collection/main';
 @import 'o-grid/main';
+@import 'o-teaser-collection/main';
 
 @if ($o-equity-highlight-app-is-silent == false) {
 
     @include oFontsIncludeAll();
+    @include oTeaser();
+    @include oTeaserCollection('');
 
     .o-equity-highlight-app {
         font-family: oFontsGetFontFamilyWithFallbacks(MetricWeb);        
@@ -74,6 +76,7 @@
             max-width: 230px;
             @include oTypographyMargin($top: 3);
         }
+        
     }
 
     .mod-format--pos {
@@ -82,7 +85,7 @@
     .mod-format--neg {
         color: #c00000;
     }
-
+    
     //origami overrides
     .o-teaser-collection__heading {
         @include oTypographySans($scale: 0);
@@ -97,7 +100,11 @@
         }
     }
     .o-grid-container {
+        @include oGridContainer();
         max-width: 260px;
         background-color: oColorsGetPaletteColor('wheat');
-    }    
+    }  
+
+    // Set to silent again to avoid being output twice
+	$o-equity-highlight-app-is-silent: true !global;  
 }
